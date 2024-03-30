@@ -1,0 +1,14 @@
+export const authSelector = state => state.auth;
+export const loaderSelector = state => state.loader.isLoading;
+export const userInfoSelector = state => state.auth.userInfo;
+export const roleSelector = state => state.auth.myRole;
+export const quotationSelector = state => state.home.quotation;
+export const birthdayOfMonthSelector = state => state.home.birthdayOfMonth;
+export const contactSelector = state => state.contact.contactList;
+export const memberSelector = state => state.charge.memberList;
+export const isActiveMemberSelector = state => state.charge.isActiveMembership;
+export const socialSelector = state => state.social.socialList;
+export const myCompanyInfoSelector = state => state.profile.myCompanyInfo;
+export const lstMessengerSelector = state => state.chat.lstMessenger;
+export const chatroomSelector = state => state.chat.allChatroom;
+export const albumSelector = state => state.album.lstAlbum;

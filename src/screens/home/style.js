@@ -1,0 +1,153 @@
+import {StyleSheet, Dimensions} from 'react-native';
+import colors from '../../values/colors';
+const width = Dimensions.get('window').width;
+const windowWidth = Dimensions.get('window').height;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  viewContent: {
+    borderWidth: 1,
+    borderRadius: 10,
+    width: width - 20,
+    borderColor: 'white',
+    backgroundColor: 'white',
+    alignSelf: 'center',
+    marginTop: 10,
+    marginBottom: 10,
+  },
+  bgQuote: {
+    height: 100,
+    width: width - 10,
+    resizeMode: 'contain',
+    alignSelf: 'flex-start',
+    marginBottom: 20,
+  },
+  text: {
+    fontSize: 18,
+    color: '#fff',
+  },
+  textQuote: {
+    color: '#084884',
+    fontSize: 15,
+    textAlign: 'center',
+  },
+  calendarHolder: {
+    marginBottom: 10,
+    borderTopLeftRadius: 15,
+    borderTopRightRadius: 15,
+    backgroundColor: 'white',
+  },
+  BgBirthday: {
+    width: width - 20,
+    height: 80,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    resizeMode: 'contain',
+  },
+  view: {
+    width: windowWidth - 10,
+    alignSelf: 'center',
+    borderWidth: 1,
+    borderRadius: 5,
+    backgroundColor: 'white',
+    borderColor: 'white',
+    padding: 10,
+    marginTop: 10,
+  },
+  viewHappyBirthday: {
+    padding: 20,
+    marginVertical: 8,
+    borderWidth: 1,
+    borderBottomColor: '#f2f2f2',
+    borderTopColor: '#f2f2f2',
+    borderRightColor: '#f2f2f2',
+    borderTopLeftRadius: 10,
+    borderBottomLeftRadius: 10,
+    justifyContent: 'space-between',
+  },
+  openViewHappyBirthday: {
+    borderLeftWidth: 4,
+    borderLeftColor: colors.purple_blue,
+  },
+  closeViewHappyBirthday: {
+    borderLeftWidth: 4,
+    borderLeftColor: colors.purple_blue,
+  },
+  txtTitle: {
+    color: 'black',
+    fontSize: 15,
+    fontWeight: '500',
+  },
+  contentContainer: {
+    backgroundColor: 'white',
+    padding: 10,
+    paddingBottom: 50,
+    position: 'absolute',
+    bottom: 0,
+    width: '100%',
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+  },
+  viewAddMoreImg: {
+    padding: 10,
+    borderWidth: 1,
+    width: 60,
+    height: 60,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderStyle: 'dotted',
+    borderColor: colors.purple_blue,
+    marginTop: 10,
+  },
+  btnSuggest: {
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    borderRadius: 20,
+    borderWidth: 0.5,
+    borderColor: 'white',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginVertical: 8,
+    backgroundColor: colors.grayE9,
+    marginRight: 10,
+  },
+  btnSend: {
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderWidth: 1,
+    borderRadius: 5,
+    borderColor: colors.white,
+    alignItems: 'center',
+    backgroundColor: colors.purple_blue,
+  },
+  btnCancel: {
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderWidth: 1,
+    borderRadius: 5,
+    borderColor: colors.purple_blue,
+    alignItems: 'center',
+    backgroundColor: colors.white,
+  },
+  viewQuote: {
+    borderWidth: 1,
+    borderRadius: 10,
+    margin: 10,
+    borderColor: 'white',
+    backgroundColor: colors.white,
+  },
+  baseShadow: {
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    elevation: 2,
+  },
+});
+export default styles;
