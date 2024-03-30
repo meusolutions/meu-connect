@@ -1,9 +1,9 @@
 const envConfig = {
   devEndPoint: 'https://clbdoanhnhanhotran.meu-solutions.com/api/',
   prodEndPoint: 'https://clbdoanhnhanhotran.meu-solutions.com/api/',
-  siybEndPoint: 'https://https://siyb-dev.meu-solutions.com/api/',
+  siybEndPoint: 'https://siyb-dev.meu-solutions.com/api/',
   josunEndPoint: 'https://josun-dev.meu-solutions.com/api/',
-  dtlabEndPoint: 'https://https://dtlab.vn/api/',
+  dtlabEndPoint: 'https://dtlab.vn/api/',
 };
 //const socketHost = 'http://192.168.1.6:4000';
 const socketHost = 'http://192.168.0.17:4000';

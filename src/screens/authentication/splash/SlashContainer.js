@@ -1,20 +1,20 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import Splash from 'react-native-splash-screen';
 
 import RootNavigation from '../../../navigation/RootNavigation';
 import AsyncStorageKeys from '../../../utils/AsyncStorageKeys';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {APP_NAVIGATE_SCREEN} from '../../../utils/constant';
-import {getMyInfo, getMyRole} from '../login/LoginSlice';
-import {useDispatch} from 'react-redux';
+import { APP_NAVIGATE_SCREEN } from '../../../utils/constant';
+import { getMyInfo, getMyRole } from '../login/LoginSlice';
+import { useDispatch } from 'react-redux';
 import SplashScreen from './SplashScreen';
-import {useTranslation} from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import Utils from '../../../utils';
 import Config from '../../../configuration';
 import axiosClient from '../../../network/axios';
 const SplashContainer = () => {
   const dispatch = useDispatch();
-  const {t, i18n} = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const checkAccount = async () => {
     const token = await Utils.getData(Config.storageKey.AUTH);
@@ -33,6 +33,7 @@ const SplashContainer = () => {
 
     if (Object.keys(server).length > 0) {
       axiosClient.defaults.baseURL = await Utils.searchServer(server);
+     
     } else {
       axiosClient.defaults.baseURL = Config.envConfig.devEndPoint;
     }
