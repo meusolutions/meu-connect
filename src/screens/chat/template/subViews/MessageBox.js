@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import {
   SafeAreaView,
   TouchableOpacity,
@@ -8,12 +8,13 @@ import {
   FlatList,
 } from 'react-native';
 import styles from '../../chatStyles';
-import {IMAGES, LogoSocial} from '../../../../values/images';
-import {TextInput} from 'react-native-paper';
-import {IC_OPTION, IC_SEND_MESSAGE} from '../../../../assets/svgAsset';
-import {SERVER_URL} from '../../../../values/string';
+import { IMAGES, LogoSocial } from '../../../../values/images';
+import { TextInput } from 'react-native-paper';
+import { IC_OPTION, IC_SEND_MESSAGE } from '../../../../assets/svgAsset';
+import { SERVER_URL } from '../../../../values/string';
 import generalStyles from '../../../../styles/generalStyles';
 import colors from '../../../../values/colors';
+import Utils from '../../../../utils';
 
 const MessageBox = props => {
   const {
@@ -34,13 +35,13 @@ const MessageBox = props => {
         <TouchableOpacity onPress={onBackToHomePage}>
           <Image
             source={IMAGES.IcLeftArrow}
-            style={{width: 20, height: 20, marginRight: 5}}
+            style={{ width: 20, height: 20, marginRight: 5 }}
           />
         </TouchableOpacity>
-        <View style={{flexDirection: 'row', marginLeft: 10}}>
+        <View style={{ flexDirection: 'row', marginLeft: 10 }}>
           <Image
-            source={{uri: SERVER_URL + chatroom?.avatar}}
-            style={{...generalStyles.avatarIcon, marginRight: 5}}
+            source={{ uri: Utils.searchAvatar(chatroom?.avatar) }}
+            style={{ ...generalStyles.avatarIcon, marginRight: 5 }}
           />
           <View>
             <Text style={styles.title}>{chatroom.name_sender}</Text>
@@ -50,7 +51,7 @@ const MessageBox = props => {
       </View>
     </View>
   );
-  const Item = ({item, index}) => {
+  const Item = ({ item, index }) => {
     return (
       <View style={styles.item}>
         {item.created_by === userDetails?.id ? (
@@ -61,7 +62,7 @@ const MessageBox = props => {
       </View>
     );
   };
-  const SenderMessages = ({item}) => {
+  const SenderMessages = ({ item }) => {
     const isLastMessage = filterPositionMessages(item);
     return (
       <View style={styles.rightChatView}>
@@ -69,8 +70,8 @@ const MessageBox = props => {
           style={[
             styles.boxShadow,
             (isLastMessage == 1 && styles.contentRightChat) ||
-              (isLastMessage == 2 && styles.contentRight2Chat) ||
-              (isLastMessage == 3 && styles.contentRight3Chat),
+            (isLastMessage == 2 && styles.contentRight2Chat) ||
+            (isLastMessage == 3 && styles.contentRight3Chat),
             styles.contentRightChatWidth,
           ]}>
           <Text style={styles.txtRightChat}>{item.content}</Text>
@@ -78,7 +79,7 @@ const MessageBox = props => {
       </View>
     );
   };
-  const ApproverMessages = ({item}) => {
+  const ApproverMessages = ({ item }) => {
     const isLastMessage = filterPositionMessages(item);
     return (
       <View style={styles.leftChatView}>
@@ -86,8 +87,8 @@ const MessageBox = props => {
           style={[
             styles.boxShadow,
             (isLastMessage == 1 && styles.contentLeftChat) ||
-              (isLastMessage == 2 && styles.contentLeft2Chat) ||
-              (isLastMessage == 3 && styles.contentLeft3Chat),
+            (isLastMessage == 2 && styles.contentLeft2Chat) ||
+            (isLastMessage == 3 && styles.contentLeft3Chat),
             styles.contentLeftChatWidth,
           ]}>
           <Text style={styles.txtLeftChat}>{item.content}</Text>
@@ -111,12 +112,12 @@ const MessageBox = props => {
   return (
     <SafeAreaView style={styles.container}>
       <Header />
-      <View style={{flex: 5, padding: 10, marginBottom: 10}}>
+      <View style={{ flex: 5, padding: 10, marginBottom: 10 }}>
         {chatSegment.length > 0 && (
           <FlatList
             inverted
             data={[...chatSegment].reverse()}
-            renderItem={({item, index}) => <Item item={item} index={index} />}
+            renderItem={({ item, index }) => <Item item={item} index={index} />}
             keyExtractor={item => item.id}
             showsVerticalScrollIndicator={false}
             onEndReached={onLoadMoreMessage}
@@ -139,7 +140,7 @@ const MessageBox = props => {
             mode="outlined"
             onChangeText={txt => setCurrentChatMessage(txt)}
             value={currentChatMessage}
-            outlineStyle={{borderRadius: 10}}
+            outlineStyle={{ borderRadius: 10 }}
             maxLength={2000}
           />
           <TouchableOpacity onPress={() => handleAddNewMessage()}>

@@ -10,7 +10,7 @@ const {HOME_PROFILE, ALBUM_PROFILE, PRODUCTION_PROFILE} = APP_NAVIGATE_SCREEN;
 const AppScreen = {
   [HOME_PROFILE]: ProfileScreen,
   [ALBUM_PROFILE]: AlbumScreen,
-  [PRODUCTION_PROFILE]: AlbumScreen,
+  // [PRODUCTION_PROFILE]: AlbumScreen,
 };
 const Tab = createMaterialTopTabNavigator();
 

@@ -11,8 +11,8 @@ import {
   View,
 } from 'react-native';
 import DatePicker from 'react-native-date-picker';
-import {Menu, MenuItem} from 'react-native-material-menu';
-import {TextInput} from 'react-native-paper';
+import { Menu, MenuItem } from 'react-native-material-menu';
+import { TextInput } from 'react-native-paper';
 import QRCode from 'react-native-qrcode-svg';
 import ViewShot from 'react-native-view-shot';
 import {
@@ -24,56 +24,56 @@ import {
 import ButtonComponent from '../../../../components/ButtonComponent';
 import Utils from '../../../../utils';
 import colors from '../../../../values/colors';
-import {FrameAvatar, IMAGES} from '../../../../values/images';
-import {SERVER_URL} from '../../../../values/string';
+import { FrameAvatar, IMAGES } from '../../../../values/images';
+import { SERVER_URL } from '../../../../values/string';
 import styles from '../../style';
 import Collapsible from 'react-native-collapsible';
-const {width, height} = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 const CompanyInfo = React.memo(
-  function ({myCompanyInfo}) {
+  function ({ myCompanyInfo }) {
     return (
       <View style={styles.viewImageProfile}>
         <View style={styles.viewAvatar}>
           <ImageBackground
             style={styles.imgAvatar}
-            source={{uri: SERVER_URL + myCompanyInfo[0]?.logo}}
+            source={{ uri: SERVER_URL + myCompanyInfo[0]?.logo }}
             imageStyle={styles.imgAvatar}></ImageBackground>
         </View>
         <Text style={styles.txtName}>{`${myCompanyInfo[0]?.name}`}</Text>
 
-        <Text style={{color: colors.purple_blue, marginBottom: 20}}>
+        <Text style={{ color: colors.purple_blue, marginBottom: 20 }}>
           {myCompanyInfo[0]?.company_field}
         </Text>
 
         <Text style={styles.contentCard}>{myCompanyInfo[0]?.full_address}</Text>
 
-        <View style={{width: '100%'}}>
+        <View style={{ width: '100%' }}>
           {myCompanyInfo[0]?.email && (
-            <View style={[styles.flexRow, {marginTop: 15}]}>
-              <View style={{flex: 1, alignItems: 'flex-end'}}>
+            <View style={[styles.flexRow, { marginTop: 15 }]}>
+              <View style={{ flex: 1, alignItems: 'flex-end' }}>
                 <EMAIL_SVG />
               </View>
-              <Text style={[styles.subTxt, {flex: 2}]}>
+              <Text style={[styles.subTxt, { flex: 2 }]}>
                 {myCompanyInfo[0]?.email}
               </Text>
             </View>
           )}
           {myCompanyInfo[0]?.cellphone && (
             <View style={styles.flexRow}>
-              <View style={{flex: 1, alignItems: 'flex-end'}}>
+              <View style={{ flex: 1, alignItems: 'flex-end' }}>
                 <SMART_PHONE />
               </View>
-              <Text style={[styles.subTxt, {flex: 2}]}>
+              <Text style={[styles.subTxt, { flex: 2 }]}>
                 {myCompanyInfo[0]?.cellphone}
               </Text>
             </View>
           )}
           {myCompanyInfo[0]?.website && (
             <View style={styles.flexRow}>
-              <View style={{flex: 1, alignItems: 'flex-end'}}>
+              <View style={{ flex: 1, alignItems: 'flex-end' }}>
                 <SMART_PHONE />
               </View>
-              <Text style={[styles.subTxt, {flex: 2}]}>
+              <Text style={[styles.subTxt, { flex: 2 }]}>
                 {myCompanyInfo[0]?.website}
               </Text>
             </View>
@@ -88,7 +88,7 @@ const CompanyInfo = React.memo(
   },
 );
 const QRcode = React.memo(
-  function ({viewShotRef, onPressShareInfo, infoUser, valueQr}) {
+  function ({ viewShotRef, onPressShareInfo, infoUser, valueQr }) {
     return (
       <View style={styles.viewQrCodeContainer}>
         <TouchableOpacity onPress={onPressShareInfo} style={styles.icShare}>
@@ -97,12 +97,12 @@ const QRcode = React.memo(
 
         <ViewShot
           ref={viewShotRef}
-          options={{format: 'png', quality: 1.0, result: 'data-uri'}}>
+          options={{ format: 'png', quality: 1.0, result: 'data-uri' }}>
           <Text style={styles.title}>Quét mã Qr</Text>
           <View style={styles.cardView}>
             <SCAN_FRAME height={190} color={colors.blue04} />
             {infoUser && (
-              <View style={{marginTop: -170}}>
+              <View style={{ marginTop: -170 }}>
                 <QRCode
                   backgroundColor="white"
                   size={150}
@@ -157,7 +157,6 @@ const ECardView = props => {
     navigateToSetting,
     onNavigateToServer,
   } = props;
-
   const valueQr =
     myCompanyInfo.length > 0 && myCompanyInfo[0].code
       ? `https://${myCompanyInfo[0].code}.meu-solutions.com/business-card?id=${userDetails?.id}&email=${userDetails?.email}`
@@ -179,7 +178,7 @@ const ECardView = props => {
       <ScrollView
         decelerationRate={'fast'}
         horizontal
-        style={{marginHorizontal: 10}}
+        style={{ marginHorizontal: 10 }}
         showsHorizontalScrollIndicator={false}
         snapToInterval={width}>
         {cardData.map((item, index) => (
@@ -194,15 +193,15 @@ const ECardView = props => {
                   }}>
                   <Image
                     source={IMAGES.IcDotFilled}
-                    style={{width: 20, height: 20}}
+                    style={{ width: 20, height: 20 }}
                   />
                   <Image
                     source={IMAGES.IcDotOutline}
-                    style={{width: 20, height: 20}}
+                    style={{ width: 20, height: 20 }}
                   />
                   <Image
                     source={IMAGES.IcDotOutline}
-                    style={{width: 20, height: 20}}
+                    style={{ width: 20, height: 20 }}
                   />
                 </View>
               </View>
@@ -211,13 +210,13 @@ const ECardView = props => {
               <View
                 style={
                   isActiveMember && myCompanyInfo.length > 0
-                    ? {marginLeft: 30}
-                    : {marginHorizontal: 10}
+                    ? { marginLeft: 30 }
+                    : { marginHorizontal: 10 }
                 }>
                 <View style={styles.viewPersonInfo}>
                   {isActiveMember && myCompanyInfo.length > 0 && (
                     <Image
-                      source={{uri: SERVER_URL + myCompanyInfo[0].logo}}
+                      source={{ uri: SERVER_URL + myCompanyInfo[0].logo }}
                       style={styles.imageLogo}
                     />
                   )}
@@ -258,7 +257,7 @@ const ECardView = props => {
                         </MenuItem>
 
                         <MenuItem onPress={onNavigateToOtp}>
-                          <Text style={{color: colors.red}}>Xóa tài khoản</Text>
+                          <Text style={{ color: colors.red }}>Xóa tài khoản</Text>
                         </MenuItem>
                         <MenuItem onPress={navigateToLogout}>
                           <Text>Đăng xuất</Text>
@@ -277,10 +276,10 @@ const ECardView = props => {
                       style={styles.imgAvatar}
                       source={
                         avatar
-                          ? {uri: avatar[0].uri}
+                          ? { uri: avatar[0].uri }
                           : infoUser?.avatar
-                          ? {uri: SERVER_URL + infoUser?.avatar}
-                          : IMAGES.ImgAvatar
+                            ? { uri: Utils.searchAvatar(infoUser?.avatar) }
+                            : IMAGES.ImgAvatar
                       }
                       imageStyle={styles.imgAvatar}>
                       {isEditField?.personal_info && <IC_EDIT />}
@@ -306,7 +305,7 @@ const ECardView = props => {
                         onEditInfo('extend_user_full_name', txt)
                       }
                       value={infoUser?.extend_user_full_name}
-                      outlineStyle={{borderWidth: 1}}
+                      outlineStyle={{ borderWidth: 1 }}
                       maxLength={20}
                     />
                   ) : (
@@ -336,7 +335,7 @@ const ECardView = props => {
                           value={moment(infoUser?.birthday).format(
                             'DD/MM/YYYY',
                           )}
-                          outlineStyle={{borderWidth: 1}}
+                          outlineStyle={{ borderWidth: 1 }}
                           editable={false}
                         />
                       </TouchableOpacity>
@@ -349,10 +348,10 @@ const ECardView = props => {
                       mode="outlined"
                       onChangeText={txt => onEditInfo('position', txt)}
                       value={infoUser?.position}
-                      outlineStyle={{borderWidth: 1}}
+                      outlineStyle={{ borderWidth: 1 }}
                     />
                   ) : (
-                    <Text style={{color: colors.purple_blue, marginBottom: 20}}>
+                    <Text style={{ color: colors.purple_blue, marginBottom: 20 }}>
                       {infoUser?.position}
                     </Text>
                   )}
@@ -360,8 +359,8 @@ const ECardView = props => {
                   {isEditField?.personal_info ? (
                     <TextInput
                       label={t('Description')}
-                      outlineStyle={{borderWidth: 1}}
-                      style={[styles.inputView, {width: '100%'}]}
+                      outlineStyle={{ borderWidth: 1 }}
+                      style={[styles.inputView, { width: '100%' }]}
                       mode="outlined"
                       multiline={true}
                       numberOfLines={4}
@@ -374,13 +373,13 @@ const ECardView = props => {
                         'I’m a kiddo that fall in love with amazing user-centric designs. I have been playing around with designs via Figma for a long time'}
                     </Text>
                   )}
-                  <View style={{width: '100%'}}>
+                  <View style={{ width: '100%' }}>
                     {!isEditField?.personal_info && (
-                      <View style={[styles.flexRow, {marginTop: 15}]}>
-                        <View style={{flex: 1, alignItems: 'flex-end'}}>
+                      <View style={[styles.flexRow, { marginTop: 15 }]}>
+                        <View style={{ flex: 1, alignItems: 'flex-end' }}>
                           <EMAIL_SVG />
                         </View>
-                        <Text style={[styles.subTxt, {flex: 2}]}>
+                        <Text style={[styles.subTxt, { flex: 2 }]}>
                           {infoUser?.email}
                         </Text>
                       </View>
@@ -392,16 +391,16 @@ const ECardView = props => {
                         value={infoUser?.cell_phone}
                         label={t('Phone_number')}
                         onChangeText={txt => onEditInfo('cell_phone', txt)}
-                        outlineStyle={{borderWidth: 1}}
+                        outlineStyle={{ borderWidth: 1 }}
                         keyboardType="phone-pad"
                       />
                     ) : (
                       infoUser?.cell_phone && (
                         <View style={styles.flexRow}>
-                          <View style={{flex: 1, alignItems: 'flex-end'}}>
+                          <View style={{ flex: 1, alignItems: 'flex-end' }}>
                             <SMART_PHONE />
                           </View>
-                          <Text style={[styles.subTxt, {flex: 2}]}>
+                          <Text style={[styles.subTxt, { flex: 2 }]}>
                             {infoUser?.cell_phone}
                           </Text>
                         </View>
@@ -419,7 +418,7 @@ const ECardView = props => {
                         <Text>{t('Edit_social')}</Text>
                         <Image
                           source={IMAGES.IcRightArrow}
-                          style={{width: 20, height: 20}}
+                          style={{ width: 20, height: 20 }}
                         />
                       </View>
                     </TouchableOpacity>
@@ -443,7 +442,7 @@ const ECardView = props => {
                             {
                               <Image
                                 source={Utils.findLogoContact(item.type)}
-                                style={{width: 35, height: 35}}
+                                style={{ width: 35, height: 35 }}
                                 resizeMode="contain"
                               />
                             }
@@ -475,16 +474,16 @@ const ECardView = props => {
                   {isActiveMember && myCompanyInfo.length > 0 && (
                     <Image
                       source={IMAGES.IcDotOutline}
-                      style={{width: 20, height: 20}}
+                      style={{ width: 20, height: 20 }}
                     />
                   )}
                   <Image
                     source={IMAGES.IcDotFilled}
-                    style={{width: 20, height: 20}}
+                    style={{ width: 20, height: 20 }}
                   />
                   <Image
                     source={IMAGES.IcDotOutline}
-                    style={{width: 20, height: 20}}
+                    style={{ width: 20, height: 20 }}
                   />
                 </View>
               </View>
@@ -502,7 +501,7 @@ const ECardView = props => {
       </ScrollView>
 
       {isShowBtnScan && (
-        <TouchableOpacity onPress={onPressScan} style={{alignItems: 'center'}}>
+        <TouchableOpacity onPress={onPressScan} style={{ alignItems: 'center' }}>
           <Image source={IMAGES.IcScan} />
         </TouchableOpacity>
       )}

@@ -1,7 +1,7 @@
 import moment from 'moment';
-import React, {startTransition, useEffect, useState} from 'react';
-import {io} from 'socket.io-client';
-import Config, {chatPath} from '../../configuration';
+import React, { startTransition, useEffect, useState } from 'react';
+import { io } from 'socket.io-client';
+import Config, { chatPath } from '../../configuration';
 import Utils from '../../utils';
 import string from '../../values/string';
 import propsProvider from './chatPropsProvider';
@@ -13,7 +13,7 @@ import {
   updateLastMessage,
 } from './chatSlice';
 import ChatMainView from './template/ChatMainView';
-import {RSA} from 'react-native-rsa-native';
+import { RSA } from 'react-native-rsa-native';
 
 const ChatContainer = props => {
   const {
@@ -40,10 +40,10 @@ const ChatContainer = props => {
     dispatch(getAllChatroom())
       .unwrap()
       .then(response => {
-        const {success} = Utils.getValues(response, '', false);
+        const { success } = Utils.getValues(response, '', false);
 
         if (success) {
-          const {collection} = Utils.getValues(response, 'data', []);
+          const { collection } = Utils.getValues(response, 'data', []);
           const sortByUpdated =
             collection.length > 0 &&
             [...collection].sort(
@@ -66,7 +66,7 @@ const ChatContainer = props => {
   const loadMessageInChatroom = async () => {
     if (chatroom && payloadMessage) {
       Utils.getData(Config.storageKey.AUTH).then(response => {
-        const {token} = Utils.getValues(response, '', {});
+        const { token } = Utils.getValues(response, '', {});
         if (token) {
           dispatch(
             getMessageInChatRoom({
@@ -75,13 +75,13 @@ const ChatContainer = props => {
               PageSize: payloadMessage.PageSize,
             }),
           ).then(async response => {
-            const {success = false} = Utils.getValues(
+            const { success = false } = Utils.getValues(
               response,
               'payload',
               false,
             );
             if (success) {
-              const {collection} = Utils.getValues(
+              const { collection } = Utils.getValues(
                 response,
                 'payload.data',
                 [],
@@ -89,8 +89,8 @@ const ChatContainer = props => {
               const sortData =
                 collection.length > 0
                   ? collection.sort(
-                      (a, b) => new Date(a.created_at) - new Date(b.created_at),
-                    )
+                    (a, b) => new Date(a.created_at) - new Date(b.created_at),
+                  )
                   : [];
               let decodedMessageArr = [];
               for (var i = 0; i < sortData.length; i++) {
@@ -163,16 +163,16 @@ const ChatContainer = props => {
           is_enabled: true,
           chatroom_id: chatroom.id,
         };
-        dispatch(sendMessage({payload})).then(async response => {
-          const {success} = Utils.getValues(response, 'payload', false);
+        dispatch(sendMessage({ payload })).then(async response => {
+          const { success } = Utils.getValues(response, 'payload', false);
           if (success) {
-            const {data} = Utils.getValues(response, 'payload', false);
+            const { data } = Utils.getValues(response, 'payload', false);
             const decodedMessage = await Utils.decodeMessage(data?.content);
             const cloneData = JSON.parse(JSON.stringify(data));
             cloneData.content = decodedMessage;
             socket.emit('newChatMessage', {
               approver_id: chatroom.sender_id,
-              newMessage: {...cloneData},
+              newMessage: { ...cloneData },
             });
             dispatch(
               updateLastMessage({
@@ -201,15 +201,15 @@ const ChatContainer = props => {
       updated_at: moment().add(7, 'hours'),
       updated_by: user_one,
     };
-    dispatch(createChatRoom({payload})).then(() => onLoadAllChatRooms());
+    dispatch(createChatRoom({ payload })).then(() => onLoadAllChatRooms());
   };
   //handle route
   const handleRoute = () => {
     if (route) {
-      const {params} = Utils.getValues(route, '', null);
+      const { params } = Utils.getValues(route, '', null);
       if (params) {
-        const {task, approver_id} = Utils.getValues(route, 'params', null);
-        const duplicate = chatroomList.find(
+        const { task, approver_id } = Utils.getValues(route, 'params', null);
+        const duplicate = chatroomList?.length > 0 && chatroomList?.find(
           chatroom => chatroom.sender_id === approver_id,
         );
         if (!duplicate && task && approver_id && userDetails) {
@@ -263,7 +263,7 @@ const ChatContainer = props => {
   const onLoadDataThenConnectSocket = () => {
     if (socket === null) return;
     Utils.getData(Config.storageKey.AUTH).then(response => {
-      const {token} = Utils.getValues(response, '', {});
+      const { token } = Utils.getValues(response, '', {});
       if (token) {
         socket.emit('getAllChatroom', token);
         socket.on('getChatroom', response => {
@@ -307,7 +307,7 @@ const ChatContainer = props => {
     socket.on('newMessage', response => {
       if (response) {
         onLoadAllChatRooms();
-        setChatroomSegment(prevState => [...prevState, {...response}]);
+        setChatroomSegment(prevState => [...prevState, { ...response }]);
       }
     });
   }, [socket]);

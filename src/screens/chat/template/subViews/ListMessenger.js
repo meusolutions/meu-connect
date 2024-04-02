@@ -9,13 +9,14 @@ import {
   View,
 } from 'react-native';
 import styles from '../../chatStyles';
-import {SERVER_URL} from '../../../../values/string';
-import {Searchbar} from 'react-native-paper';
-import {IMAGES} from '../../../../values/images';
+import { SERVER_URL } from '../../../../values/string';
+import { Searchbar } from 'react-native-paper';
+import { IMAGES } from '../../../../values/images';
 import FastImage from 'react-native-fast-image';
-import {IC_ADD_NEW_MESSAGE} from '../../../../assets/svgAsset';
+import { IC_ADD_NEW_MESSAGE } from '../../../../assets/svgAsset';
+import Utils from '../../../../utils';
 const Item = React.memo(props => {
-  const {item, onInitLoadMessage, showLessMessage, calcMessageArrival} = props;
+  const { item, onInitLoadMessage, showLessMessage, calcMessageArrival } = props;
   return (
     <TouchableOpacity
       onPress={() => onInitLoadMessage(item)}
@@ -35,7 +36,7 @@ const Item = React.memo(props => {
             }}>
             <FastImage
               source={{
-                uri: SERVER_URL + item.avatar,
+                uri: Utils.searchAvatar(item.avatar),
               }}
               style={styles.senderAvatar}
             />
@@ -46,7 +47,7 @@ const Item = React.memo(props => {
               </Text>
             </View>
           </View>
-          <View style={{flex: 1, alignItems: 'flex-end'}}>
+          <View style={{ flex: 1, alignItems: 'flex-end' }}>
             <Text style={[styles.subtitle]}>
               {calcMessageArrival(item.updated_at ?? item.created_at)}
             </Text>
@@ -80,7 +81,7 @@ const ListMessage = React.memo(props => {
           <IC_ADD_NEW_MESSAGE />
         </TouchableOpacity>
       </View>
-      <View style={{margin: 10}}>
+      <View style={{ margin: 10 }}>
         {/* <Searchbar
           style={styles.inputView}
           placeholder="Search"
@@ -98,7 +99,7 @@ const ListMessage = React.memo(props => {
       <View>
         <FlatList
           data={chatroomList}
-          renderItem={({item}) => (
+          renderItem={({ item }) => (
             <Item
               item={item}
               onInitLoadMessage={onInitLoadMessage}

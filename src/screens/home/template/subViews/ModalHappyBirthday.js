@@ -17,6 +17,7 @@ import colors from '../../../../values/colors';
 import { IMAGES, IconProfile } from '../../../../values/images';
 import { SERVER_URL } from '../../../../values/string';
 import styles from '../../style';
+import Utils from '../../../../utils';
 const ModalHappyBirthday = props => {
   const {
     openModalWishBirthday,
@@ -37,12 +38,12 @@ const ModalHappyBirthday = props => {
         }
         return !(gestureState.dx === 0 && gestureState.dy === 0);
       },
-      onPanResponderMove: Animated.event([null, {dx: pan.x, dy: pan.y}], {
+      onPanResponderMove: Animated.event([null, { dx: pan.x, dy: pan.y }], {
         useNativeDriver: false,
       }),
       onPanResponderRelease: () => {
         Animated.spring(pan, {
-          toValue: {x: 0, y: 0},
+          toValue: { x: 0, y: 0 },
           useNativeDriver: true,
         }).start();
       },
@@ -55,18 +56,18 @@ const ModalHappyBirthday = props => {
           styles.contentContainer,
           styles.baseShadow,
           {
-            transform: [{translateY: pan.y}],
+            transform: [{ translateY: pan.y }],
           },
         ]}
         {...panResponder.panHandlers}>
         {/* <Modal animationType="slide" transparent={true} /> */}
-        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-          <Text style={{color: 'black', fontWeight: 'bold', fontSize: 14}}>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+          <Text style={{ color: 'black', fontWeight: 'bold', fontSize: 14 }}>
             {`Ngày ${modalVisible?.day?.day} tháng ${modalVisible?.day?.month} năm ${modalVisible?.day?.year} 🎉`}
           </Text>
           <ButtonComponent
             iconSource={IconProfile.IcCloseBlack}
-            styleIcon={{width: 20, height: 20, zIndex: 99}}
+            styleIcon={{ width: 20, height: 20, zIndex: 99 }}
             onPress={handleCloseDesBirthday}
           />
         </View>
@@ -86,14 +87,14 @@ const ModalHappyBirthday = props => {
                   flexDirection: 'row',
                   justifyContent: 'space-between',
                 }}>
-                <View style={{flexDirection: 'row'}}>
+                <View style={{ flexDirection: 'row' }}>
                   <Image
                     source={{
-                      uri: SERVER_URL + item.avatar,
+                      uri: Utils.searchAvatar(item.avatar)
                     }}
-                    style={{width: 40, height: 40, borderRadius: 5}}
+                    style={{ width: 40, height: 40, borderRadius: 5 }}
                   />
-                  <View style={{paddingLeft: 10}}>
+                  <View style={{ paddingLeft: 10 }}>
                     <Text
                       style={
                         styles.txtTitle
@@ -113,7 +114,7 @@ const ModalHappyBirthday = props => {
               </View>
               {modalVisible?.managerOpenWish[index].enable && (
                 <View>
-                  <View style={{marginTop: 10}}>
+                  <View style={{ marginTop: 10 }}>
                     <TextInput
                       mode="outlined"
                       activeUnderlineColor={false}
@@ -123,7 +124,7 @@ const ModalHappyBirthday = props => {
                         'Vui lòng nhập lời chúc tại đây hoặc gợi ý bên dưới'
                       }
                       placeholderTextColor={colors.gray59}
-                      style={{backgroundColor: 'white'}}
+                      style={{ backgroundColor: 'white' }}
                       value={messageBirthday.massage}
                       onChangeText={txt =>
                         setMessageBirthday(prev => ({
@@ -133,11 +134,11 @@ const ModalHappyBirthday = props => {
                       }
                     />
                     {/** suggest wish  */}
-                    <View style={{flexDirection: 'row'}}>
+                    <View style={{ flexDirection: 'row' }}>
                       <ButtonComponent
                         style={styles.btnSuggest}
                         text={'Chúc mưng sinh nhật !'}
-                        textStyle={{color: colors.purple_blue}}
+                        textStyle={{ color: colors.purple_blue }}
                         onPress={() =>
                           setMessageBirthday(prev => ({
                             ...prev,
@@ -148,7 +149,7 @@ const ModalHappyBirthday = props => {
                       <ButtonComponent
                         style={styles.btnSuggest}
                         text={'Sinh nhật vui vẻ 🍰'}
-                        textStyle={{color: colors.purple_blue}}
+                        textStyle={{ color: colors.purple_blue }}
                         onPress={() =>
                           setMessageBirthday(prev => ({
                             ...prev,
@@ -157,11 +158,11 @@ const ModalHappyBirthday = props => {
                         }
                       />
                     </View>
-                    <View style={{flexDirection: 'row'}}>
+                    <View style={{ flexDirection: 'row' }}>
                       {item?.imgArr &&
                         item?.imgArr.map((el, position) => {
                           return (
-                            <View key={position} style={{marginRight: 10}}>
+                            <View key={position} style={{ marginRight: 10 }}>
                               <FastImage
                                 source={{
                                   uri: el.uri,
@@ -179,7 +180,7 @@ const ModalHappyBirthday = props => {
                         <View style={styles.viewAddMoreImg}>
                           <ButtonComponent
                             iconSource={IMAGES.IcAddMoreImg}
-                            styleIcon={{height: 25, width: 25}}
+                            styleIcon={{ height: 25, width: 25 }}
                             onPress={() => addMoreImgFromGallery(index)}
                           />
                         </View>

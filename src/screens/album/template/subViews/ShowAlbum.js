@@ -9,13 +9,13 @@ import {
 } from 'react-native';
 import styles from '../../albumStyles';
 import colors from '../../../../values/colors';
-import {IMAGES} from '../../../../values/images';
+import { IMAGES } from '../../../../values/images';
 import Config from '../../../../configuration';
 import YoutubePlayerComponent from '../../../../components/youtube_player';
 
 const Item = React.memo(
   props => {
-    const {item, playing, onStateChange, getVideoId} = props;
+    const { item, playing, onStateChange, getVideoId } = props;
     return (
       <View style={styles.itemPlayer}>
         <View>
@@ -23,6 +23,7 @@ const Item = React.memo(
             play={playing}
             videoId={getVideoId(item.link)}
             onChangeState={onStateChange}
+            height={100}
           />
           <View style={styles.playerTitle}>
             <Text
@@ -39,13 +40,13 @@ const Item = React.memo(
   (prev, next) => prev.item === next.item && prev.playing === next.playing,
 );
 const ShowAlbum = props => {
-  const {playing, onStateChange, onSwitchPage, albums, getVideoId} = props;
+  const { playing, onStateChange, onSwitchPage, albums, getVideoId } = props;
 
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={{ flex: 1 }}>
       <FlatList
         data={albums}
-        renderItem={({item}) => (
+        renderItem={({ item }) => (
           <Item
             item={item}
             playing={playing}
@@ -59,7 +60,7 @@ const ShowAlbum = props => {
       <TouchableOpacity
         style={styles.btnAddMore}
         onPress={() => onSwitchPage(Config.albumPath.AddNewScreen)}>
-        <Image source={IMAGES.IcAddMore} style={{width: 20, height: 20}} />
+        <Image source={IMAGES.IcAddMore} style={{ width: 20, height: 20 }} />
       </TouchableOpacity>
     </SafeAreaView>
   );

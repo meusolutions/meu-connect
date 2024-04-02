@@ -1,14 +1,14 @@
-import React, {useCallback, useState, useEffect} from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import AlbumMainView from './template/AlbumMainView';
 import albumPropsProvider from './albumPropsProvider';
-import {launchImageLibrary} from 'react-native-image-picker';
-import {useTranslation} from 'react-i18next';
-import {addNewAlbum, getAlbumByID} from './albumSlice';
+import { launchImageLibrary } from 'react-native-image-picker';
+import { useTranslation } from 'react-i18next';
+import { addNewAlbum, getAlbumByID } from './albumSlice';
 import Utils from '../../utils';
 
 const AlbumContainer = props => {
-  const {dispatch, ToastMessage, userDetails, albums} = props;
-  const {t, i18n} = useTranslation();
+  const { dispatch, ToastMessage, userDetails, albums } = props;
+  const { t, i18n } = useTranslation();
 
   const [playing, setPlaying] = useState(false);
   const [pageName, setPageName] = useState();
@@ -25,7 +25,7 @@ const AlbumContainer = props => {
   }, []);
 
   const onAddNewAlbumChange = useCallback((text, key) => {
-    setAddNewAlbumInfo(prev => ({...prev, [key]: text}));
+    setAddNewAlbumInfo(prev => ({ ...prev, [key]: text }));
   }, []);
 
   const openGallery = () => {
@@ -36,14 +36,14 @@ const AlbumContainer = props => {
       },
       response => {
         if (!response.didCancel) {
-          setAddNewAlbumInfo(prev => ({...prev, image: response.assets}));
+          setAddNewAlbumInfo(prev => ({ ...prev, image: response.assets }));
         }
       },
     );
   };
 
   const onPressDeleteGallery = () =>
-    setAddNewAlbumInfo(prev => ({...prev, image: null}));
+    setAddNewAlbumInfo(prev => ({ ...prev, image: null }));
 
   const onSubmitAddNewAlbum = () => {
     if (addNewAlbumInfo?.title && addNewAlbumInfo?.link) {
@@ -53,12 +53,13 @@ const AlbumContainer = props => {
         type: 'youtube',
       };
       dispatch(addNewAlbum(payload)).then(res => {
-        const {success} = Utils.getValues(res, 'payload', false);
+        const { success } = Utils.getValues(res, 'payload', false);
         if (success) {
-          ToastMessage({title: 'Thêm mới thành công'});
+          onLoadAlbum()
+          ToastMessage({ title: 'Thêm mới thành công' });
           setAddNewAlbumInfo(null);
         } else {
-          ToastMessage({title: 'Thêm mới thất bại', type: 'error'});
+          ToastMessage({ title: 'Thêm mới thất bại', type: 'error' });
         }
       });
     }
@@ -69,13 +70,13 @@ const AlbumContainer = props => {
       /(youtu.*be.*)\/(watch\?v=|embed\/|v|shorts|)(.*?((?=[&#?])|$))/gm;
     return regex.exec(url)[3];
   };
+  const onLoadAlbum = () => {
+    dispatch(getAlbumByID({ user_id: userDetails?.id }));
+  };
 
   useEffect(() => {
-    const onLoadAlbum = () => {
-      dispatch(getAlbumByID({user_id: userDetails?.id}));
-    };
     onLoadAlbum();
-  }, []);
+  }, [userDetails]);
 
   const albumProps = {
     playing,

@@ -11,7 +11,8 @@ const styles = StyleSheet.create({
   itemPlayer: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginVertical: 5,
+    marginVertical: 10,
+    width: '100%',
   },
   playerTitle: {
     borderBottomEndRadius: 10,

@@ -83,5 +83,8 @@ const string = {
 };
 // const SERVER_URL = 'https://gateway.dev.meu-solutions.com/clbdoanhnhanhotran';
 const SERVER_URL = 'https://clbdoanhnhanhotran.meu-solutions.com';
-export {SERVER_URL};
+const DTLAB_URL = 'https://dtlab.vn';
+const SIYB_URL = 'https://siyb-dev.meu-solutions.com';
+const JOSUBN_URL = 'https://josun-dev.meu-solutions.com';
+export { SERVER_URL, DTLAB_URL, SIYB_URL, JOSUBN_URL };
 export default string;

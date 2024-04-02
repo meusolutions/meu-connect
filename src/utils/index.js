@@ -1,9 +1,10 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import moment from 'moment';
 import RNRestart from 'react-native-restart';
-import {LogoSocial} from '../values/images';
-import {RSAKeychain, RSA} from 'react-native-rsa-native';
+import { LogoSocial } from '../values/images';
+import { RSAKeychain, RSA } from 'react-native-rsa-native';
 import Config from '../configuration';
+import axiosClient from '../network/axios';
 var _ = require('lodash');
 const AllLogoSocial = [
   {
@@ -218,6 +219,13 @@ const searchServer = name => {
   return server[name];
 };
 
+const searchAvatar = (avatar) => {
+
+  const url = axiosClient.defaults.baseURL.split('/api')[0];
+  return url + avatar
+
+}
+
 const Utils = {
   AllLogoSocial,
   storeData,
@@ -235,5 +243,6 @@ const Utils = {
   decodeMessage,
   onCreateRSA,
   searchServer,
+  searchAvatar
 };
 export default Utils;

@@ -7,10 +7,11 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {IMAGES} from '../../../values/images';
-import {SERVER_URL} from '../../../values/string';
+import { IMAGES } from '../../../values/images';
+import { SERVER_URL } from '../../../values/string';
 import styles from '../contactStyle';
 import ContactInfoComponent from './subViews/ContactInfoComponent';
+import Utils from '../../../utils';
 const ContactMainView = props => {
   const {
     formatContact,
@@ -24,14 +25,14 @@ const ContactMainView = props => {
     onNavigateToChat,
     isShowContact,
   } = props;
-  const InfoItem = ({item}) => {
+  const InfoItem = ({ item }) => {
     return (
       <TouchableOpacity
         onPress={() => onPressOpenInfo(item)}
         style={styles.item}>
         <Image
           source={{
-            uri: SERVER_URL + item.avatar,
+            uri: Utils.searchAvatar(item.avatar)
           }}
           style={styles.avatarLst}
         />
@@ -51,8 +52,8 @@ const ContactMainView = props => {
           <SectionList
             sections={formatContact}
             keyExtractor={(item, index) => item + index}
-            renderItem={({item}) => <InfoItem item={item} />}
-            renderSectionHeader={({section: {last_name}}) => (
+            renderItem={({ item }) => <InfoItem item={item} />}
+            renderSectionHeader={({ section: { last_name } }) => (
               <Text style={styles.header}>{last_name}</Text>
             )}
           />
@@ -61,7 +62,7 @@ const ContactMainView = props => {
         <View style={styles.emptyView}>
           <Image
             source={IMAGES.IcEmptyBox}
-            style={{width: 100, height: 100, alignSelf: 'center'}}
+            style={{ width: 100, height: 100, alignSelf: 'center' }}
           />
         </View>
       )}
