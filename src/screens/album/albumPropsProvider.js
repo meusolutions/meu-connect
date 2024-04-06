@@ -11,7 +11,11 @@ export default function albumPropsProvider(props) {
     onSubmitAddNewAlbum,
     t,
     albums,
-    getVideoId
+    getVideoId,
+    onDeleteAlbum,
+    showAlert,
+    hideAlert,
+    onSubmitDeleteAlbum
   } = props;
   return {
     pageName,
@@ -21,6 +25,10 @@ export default function albumPropsProvider(props) {
       onSwitchPage,
       albums,
       getVideoId,
+      onDeleteAlbum,
+      showAlert,
+      hideAlert,
+      onSubmitDeleteAlbum
     },
     addNewAlbumProps: {
       addNewAlbumInfo,

@@ -3,7 +3,7 @@ import AlbumMainView from './template/AlbumMainView';
 import albumPropsProvider from './albumPropsProvider';
 import { launchImageLibrary } from 'react-native-image-picker';
 import { useTranslation } from 'react-i18next';
-import { addNewAlbum, getAlbumByID } from './albumSlice';
+import { addNewAlbum, deleteAlbum, getAlbumByID } from './albumSlice';
 import Utils from '../../utils';
 
 const AlbumContainer = props => {
@@ -13,6 +13,12 @@ const AlbumContainer = props => {
   const [playing, setPlaying] = useState(false);
   const [pageName, setPageName] = useState();
   const [addNewAlbumInfo, setAddNewAlbumInfo] = useState();
+  const [chooseVideoId, setChooseVideoId] = useState();
+  const [showAlert, setShowAlert] = useState({
+    isError: false,
+    title: '',
+    message: '',
+  });
 
   const onSwitchPage = page => {
     setPageName(page);
@@ -66,13 +72,43 @@ const AlbumContainer = props => {
   };
 
   const getVideoId = url => {
-    let regex =
-      /(youtu.*be.*)\/(watch\?v=|embed\/|v|shorts|)(.*?((?=[&#?])|$))/gm;
-    return regex.exec(url)[3];
+    if (!url) return '';
+    var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
+    var match = url.match(regExp);
+    return (match && match[7].length == 11) ? match[7] : false;
   };
   const onLoadAlbum = () => {
     dispatch(getAlbumByID({ user_id: userDetails?.id }));
   };
+
+  const onDeleteAlbum = (index) => {
+    setChooseVideoId(index)
+    setShowAlert({
+      isError: true,
+      title: 'Hệ thống',
+      message: 'Bạn chắc xóa album này chứ ?',
+    });
+
+  }
+  const hideAlert = () => {
+    setShowAlert({
+      isError: false,
+      title: '',
+      message: '',
+    });
+
+  };
+
+  const onSubmitDeleteAlbum = () => {
+    dispatch(deleteAlbum({ id: albums[chooseVideoId].id })).then((res) => {
+      const { success } = Utils.getValues(res, 'payload', false)
+      if (success) {
+        ToastMessage({ title: 'Xóa thành công' });
+        onLoadAlbum();
+      }
+      hideAlert()
+    })
+  }
 
   useEffect(() => {
     onLoadAlbum();
@@ -83,6 +119,7 @@ const AlbumContainer = props => {
     pageName,
     addNewAlbumInfo,
     albums,
+    showAlert,
     t,
     onStateChange,
     onSwitchPage,
@@ -90,7 +127,10 @@ const AlbumContainer = props => {
     openGallery,
     onPressDeleteGallery,
     onSubmitAddNewAlbum,
-    getVideoId
+    getVideoId,
+    onDeleteAlbum,
+    hideAlert,
+    onSubmitDeleteAlbum
   };
   return <AlbumMainView {...albumPropsProvider(albumProps)} />;
 };

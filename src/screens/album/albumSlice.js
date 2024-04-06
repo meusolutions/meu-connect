@@ -23,6 +23,16 @@ export const addNewAlbum = createAsyncThunk(
     });
   },
 );
+export const deleteAlbum = createAsyncThunk(
+  'album/deleteAlbum',
+  async (data, thunkAPI) => {
+    return serviceRequest({
+      dispatch: thunkAPI.dispatch,
+      serviceMethod: albumApi.requestDeleteAlbum,
+      payload: data,
+    });
+  },
+);
 const album = createSlice({
   name: 'album',
   initialState: {},

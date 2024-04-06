@@ -5,4 +5,5 @@ export default {
     return axiosClient.get(`album/${user_id}`)
   },
   requestAddNewAlbum: payload => axiosClient.post(`album`, payload),
+  requestDeleteAlbum: ({ id }) => axiosClient.delete(`album/${id}`),
 };
